@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -25,15 +26,27 @@ module.exports = {
         use: {
           loader: 'babel-loader' // The loader that he going to use
         }
+      },
+      // Rule for recognize CSS
+      {
+        test: /\.css|.styl$/i, // The I gave us the oportunity to recognize the CSS and Stylus files (or another preprocessor)
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'stylus-loader'
+        ]
       }
     ]
   },
   // Plugins that we are going to use
   plugins: [
+    // HTML plugin
     new HtmlWebpackPlugin({
       inject: true, // For insert the elements
       template: './public/index.html', // Location of out Template
       filename: './index.html' // Compilation file name and path
-    })
+    }),
+    // CSS Plugin
+    new MiniCssExtractPlugin(),
   ]
 }
