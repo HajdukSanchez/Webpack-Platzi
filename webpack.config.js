@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -27,4 +28,12 @@ module.exports = {
       }
     ]
   },
+  // Plugins that we are going to use
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true, // For insert the elements
+      template: './public/index.html', // Location of out Template
+      filename: './index.html' // Compilation file name and path
+    })
+  ]
 }
