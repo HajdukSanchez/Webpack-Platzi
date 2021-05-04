@@ -2,7 +2,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const { loader } = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPLugin = require('terser-webpack-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -11,7 +12,7 @@ module.exports = {
   output: {
     // What is the directory of our project and the output path name
     path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js', // The name of out JS output file
+    filename: '[name].[contenthash].js', // The name of out JS output file, the output file is going to be identifying with a hash
     assetModuleFilename: 'assets/images/[hash][ext][query]' // The filename for images an her directory
   },
   // Extensions that he need to work with
@@ -52,7 +53,7 @@ module.exports = {
           options: { // Configuration options
             limit: 10000,
             MimeType: 'application/font-woff', // Data type taht we are use
-            name: '[name].[ext]', // The output filename, in this case the output file is going to have the original name and extension
+            name: '[name].[contenthash].[ext]', // The output filename, in this case the output file is going to have the original name and extension
             outputPath: './assets/fonts/', // The final Location
             publicPath: './assets/fonts/', // The public path directory
             esModule: false
@@ -70,7 +71,9 @@ module.exports = {
       filename: './index.html' // Compilation file name and path
     }),
     // CSS Plugin
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'assets/[name][contenthash].css/'
+    }),
     // Plugin to copy elements to dist folder like images
     new CopyPlugin({
       patterns: [
@@ -80,5 +83,13 @@ module.exports = {
         }
       ]
     }),
-  ]
+  ],
+  // Plugins to optimization
+  optimization: {
+    minimize: true, // Option for optimize the project
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPLugin(),
+    ]
+  }
 }
