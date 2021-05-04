@@ -5,6 +5,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPLugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -95,6 +96,8 @@ module.exports = {
     }),
     // Plugin for environment variables
     new Dotenv(),
+    // Clen plugin for delete lastest version on the dist directory
+    new CleanWebpackPlugin()
   ],
   // Plugins to optimization
   optimization: {

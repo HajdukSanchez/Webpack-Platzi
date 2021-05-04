@@ -17,6 +17,8 @@ module.exports = {
   },
   // Configuration mode
   mode: 'development',
+  // Configuration for automathic save and run of our project
+  watch: true,
   // Extensions that he need to work with
   resolve: {
     extensions: ['.js'], // Array of extension that webpack needs to identify in our project
