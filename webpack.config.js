@@ -17,7 +17,16 @@ module.exports = {
   },
   // Extensions that he need to work with
   resolve: {
-    extensions: ['.js'] // Array of extension that webpack needs to identify in our project
+    extensions: ['.js'], // Array of extension that webpack needs to identify in our project
+    // Alias for directorie paths of the projects
+    alias: {
+      // With the at (@) webpack identify that it is an alias
+      // The second parameter is the path of our utils
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@templates': path.resolve(__dirname, 'src/templates/'),
+      '@styles': path.resolve(__dirname, 'src/styles/'),
+      '@images': path.resolve(__dirname, 'src/assets/images/'),
+    }
   },
   // When we are going to add the configuration of babel plugin for JS
   module: {
@@ -55,7 +64,7 @@ module.exports = {
             MimeType: 'application/font-woff', // Data type taht we are use
             name: '[name].[contenthash].[ext]', // The output filename, in this case the output file is going to have the original name and extension
             outputPath: './assets/fonts/', // The final Location
-            publicPath: './assets/fonts/', // The public path directory
+            publicPath: '../assets/fonts/', // The public path directory
             esModule: false
           }
         }
@@ -72,7 +81,7 @@ module.exports = {
     }),
     // CSS Plugin
     new MiniCssExtractPlugin({
-      filename: 'assets/[name][contenthash].css/'
+      filename: 'assets/[name].[contenthash].css'
     }),
     // Plugin to copy elements to dist folder like images
     new CopyPlugin({
