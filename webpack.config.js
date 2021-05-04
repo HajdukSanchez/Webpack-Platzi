@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -48,5 +49,14 @@ module.exports = {
     }),
     // CSS Plugin
     new MiniCssExtractPlugin(),
+    // Plugin to copy elements to dist folder like images
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src', 'assets/images'), // Here is where the files that we want to move are
+          to: 'assets/images' // The final path to move the files
+        }
+      ]
+    }),
   ]
 }
