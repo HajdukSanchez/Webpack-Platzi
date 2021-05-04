@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const { loader } = require('mini-css-extract-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -11,6 +12,7 @@ module.exports = {
     // What is the directory of our project and the output path name
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.js', // The name of out JS output file
+    assetModuleFilename: 'assets/images/[hash][ext][query]' // The filename for images an her directory
   },
   // Extensions that he need to work with
   resolve: {
@@ -37,9 +39,25 @@ module.exports = {
           'stylus-loader'
         ]
       },
+      // Rule for png images
       {
         test: /\.png/, // Loader for images, to convert it to base 64
         type: 'asset/resource' // That is a resorce for images that webpack have
+      },
+      // Rule for fonts
+      {
+        test: /\.(woff|woff2)$/, // Read Woff or Woff2 files
+        use: {
+          loader: 'url-loader',
+          options: { // Configuration options
+            limit: 10000,
+            MimeType: 'application/font-woff', // Data type taht we are use
+            name: '[name].[ext]', // The output filename, in this case the output file is going to have the original name and extension
+            outputPath: './assets/fonts/', // The final Location
+            publicPath: './assets/fonts/', // The public path directory
+            esModule: false
+          }
+        }
       }
     ]
   },
