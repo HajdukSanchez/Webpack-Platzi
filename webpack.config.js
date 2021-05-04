@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPLugin = require('terser-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   // Enter pint of our application
@@ -92,6 +93,8 @@ module.exports = {
         }
       ]
     }),
+    // Plugin for environment variables
+    new Dotenv(),
   ],
   // Plugins to optimization
   optimization: {
