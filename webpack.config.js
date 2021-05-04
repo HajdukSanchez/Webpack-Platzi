@@ -36,6 +36,10 @@ module.exports = {
           'css-loader',
           'stylus-loader'
         ]
+      },
+      {
+        test: /\.png/, // Loader for images, to convert it to base 64
+        type: 'asset/resource' // That is a resorce for images that webpack have
       }
     ]
   },
