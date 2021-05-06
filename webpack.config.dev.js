@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const BundleAnalyzerPlugin = require('bundle-analyzer-plugin');
 
 module.exports = {
   // Enter pint of our application
@@ -98,6 +99,8 @@ module.exports = {
     }),
     // Plugin for environment variables
     new Dotenv(),
+    // Plugin for optimization analyzer
+    new BundleAnalyzerPlugin(),
   ],
   // Plugin for a local development server
   devServer: {
