@@ -18,7 +18,7 @@ module.exports = {
   // Configuration mode
   mode: 'development',
   // Configuration for automathic save and run of our project
-  watch: true,
+  // watch: true,
   // Extensions that he need to work with
   resolve: {
     extensions: ['.js'], // Array of extension that webpack needs to identify in our project
@@ -99,4 +99,11 @@ module.exports = {
     // Plugin for environment variables
     new Dotenv(),
   ],
+  // Plugin for a local development server
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'), // The path of the files that the server is going to observe
+    compress: true, // For compress the files
+    historyApiFallback: true, // This bring us a history about what happens in our navigator
+    port: 3006 // Port when the server is goin to deploy
+  }
 }
