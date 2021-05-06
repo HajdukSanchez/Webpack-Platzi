@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
-const BundleAnalyzerPlugin = require('bundle-analyzer-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   // Enter pint of our application
@@ -18,6 +18,8 @@ module.exports = {
   },
   // Configuration mode
   mode: 'development',
+  // Configurations for dev tools
+  devtool: 'source-map',
   // Configuration for automathic save and run of our project
   // watch: true,
   // Extensions that he need to work with
